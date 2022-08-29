@@ -1,0 +1,6 @@
+・動作確認用
+curl -v -XPOST http://localhost:3000 -F "file=@/Users/sougetsu/Pictures/original.jpg"
+
+・コンテナ作成
+cd image_editor/
+docker run -itd -p 3000:3000 image_editor
