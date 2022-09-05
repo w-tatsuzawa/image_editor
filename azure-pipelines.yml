@@ -27,5 +27,6 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+- task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
