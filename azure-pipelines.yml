@@ -32,9 +32,9 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker save MY_DOCKER_REPO_IMAGE_NAME:$(tag) -o $(Pipeline.Workspace)/MY_IMAGE_FILE.tar
+          docker save image_editor:$(tag) -o $(Pipeline.Workspace)/image_editor.tar
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)/MY_IMAGE_FILE.tar'
+        targetPath: '$(Pipeline.Workspace)/image_editor.tar'
         artifact: 'MY_ARTIFACT'
         publishLocation: 'pipeline'
