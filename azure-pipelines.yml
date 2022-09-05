@@ -27,6 +27,14 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      condition: succeeded()
+    - task: Bash@3
+      displayName: Save Docker Image
+      inputs:
+        targetType: 'inline'
+        script: |
+          docker save MY_DOCKER_REPO_IMAGE_NAME:$(tag) -o $(Pipeline.Workspace)/MY_IMAGE_FILE.tar
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Pipeline.Workspace)/MY_IMAGE_FILE.tar'
+        artifact: 'MY_ARTIFACT'
+        publishLocation: 'pipeline'
